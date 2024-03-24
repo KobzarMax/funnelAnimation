@@ -445,4 +445,7 @@
   .third-icons-container {
     max-width: 80%;
   }
+  .funnel-counter-item .pipeline-count, .funnel-counter-item .meetings-count, .funnel-counter-item .leads-count {
+    display: block;
+  }
 }
