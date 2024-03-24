@@ -30,6 +30,24 @@ if (funnelItems) {
     })
 }
 
+const imagesToRandom = [
+    './asset/man_single.svg',
+    './asset/girl_small.svg',
+    './asset/granny_small.svg',
+    './asset/headphone_small.svg',
+    './asset/boy_small.svg',
+    './asset/guy_small.svg'
+];
+
+const imagesWithIconToRandom = [
+    './asset/man.svg',
+    './asset/girl.svg',
+    './asset/granny.svg',
+    './asset/headphone_guy.svg',
+    './asset/boy.svg',
+    './asset/guy.svg'
+];
+
 function rerunAnimation(iconsList, container) {
     let animationCount = 0;
     const originalIcons = iconsList.querySelectorAll('img');
@@ -40,7 +58,7 @@ function rerunAnimation(iconsList, container) {
     originalIcons.forEach((icon) => {
         icon.addEventListener('animationend', function() {
             animationCount++;
-            if (animationCount === originalIcons.length - 2) {
+            if (animationCount === originalIcons.length - 3) {
                 duplicateIcons(iconsList, container);
             }
         });
@@ -50,8 +68,8 @@ function rerunAnimation(iconsList, container) {
 function runAnimationOnce(fistBlock, container) {
     const images = fistBlock.querySelectorAll('img');
     images.forEach(function(img, index) {
-        img.style.animation = `fall2 ${index % 2 === 0 ? 1 : 2}s`;
-        img.style.animationDelay = index * 0.3 + 's';
+        img.style.animation = `fall2 ${index % 2 === 0 ? 5 : 6}s`;
+        img.style.animationDelay = index * 1 + 's';
         img.style.animationFillMode = 'forwards';
     });
 
@@ -63,13 +81,19 @@ function duplicateIcons(block, container) {
 
     const clonedImages = clonedIcons.querySelectorAll('img');
     clonedImages.forEach(function(img, index) {
-        img.style.animation = `fall2 ${index % 2 === 0 ? 1 : 2}s`;
-        img.style.animationDelay = index * 0.3 + 's';
+        img.style.animation = `fall2 ${index % 2 === 0 ? 5 : 6}s`;
+        img.style.animationDelay = index * 1 + 's';
         img.style.animationFillMode = 'forwards';
     });
 
     container.appendChild(clonedIcons);
     rerunAnimation(clonedIcons, container);
+    const randomImage = clonedIcons.querySelector('.randomImage');
+
+    if (randomImage) {
+        const randomIndex = Math.floor(Math.random() * imagesToRandom.length);
+        randomImage.src = imagesToRandom[randomIndex];
+    }
 }
 
 const funnelItemWrappers = document.querySelectorAll('.funnel-item-wrapper');
@@ -89,18 +113,18 @@ salesItemsContainers.forEach((item, index) => {
     if (screenWidth > 1200) {
         if (index === 0 || index === 1 || index === 2) {
             salesItem.style.setProperty('--screenMiddle', `calc(${30 - index * 10}vw)`);
-            salesItem.style.animationDelay = index * 0.3 + 's';
+            salesItem.style.animationDelay = index * 0.5 + 's';
         } else {
             salesItem.style.setProperty('--screenMiddle', `calc(${20 - index * 10}vw)`);
-            salesItem.style.animationDelay = index * 0.3 + 's';
+            salesItem.style.animationDelay = index * 0.5 + 's';
         }
     } else {
         if (index === 0 || index === 2 || index === 4) {
             salesItem.style.setProperty('--screenMiddle', `calc(${index * 10}vw)`);
-            salesItem.style.animationDelay = index * 0.3 + 's';
+            salesItem.style.animationDelay = index * 0.5 + 's';
         } else {
             salesItem.style.setProperty('--screenMiddle', `calc(${10 - index * 10}vw)`);
-            salesItem.style.animationDelay = index * 0.3 + 's';
+            salesItem.style.animationDelay = index * 0.5 + 's';
         }
     }
 
@@ -110,8 +134,8 @@ salesItemsContainers.forEach((item, index) => {
 
 function runSalesAnimation (image, imageWrapper, index) {
 
-    image.style.animation = `fall ${index % 2 === 0 ? 3 : 4}s`;
-    image.style.animationDelay = index * 0.3 + 's';
+    image.style.animation = `fall ${index % 2 === 0 ? 7 : 9}s`;
+    image.style.animationDelay = index * 1.3 + 's';
     image.style.animationFillMode = 'forwards';
 
     rerunSalesAnimation(image, imageWrapper, index);
@@ -123,15 +147,22 @@ function rerunSalesAnimation(originalIcon, container, index) {
         iconsLength[1].remove();
     }
     originalIcon.addEventListener('animationend', function() {
-            duplicateSalesIcon(originalIcon, container, index);
+        duplicateSalesIcon(originalIcon, container, index);
+
+        originalIcon.style.opacity = '0';
+        const randomIndex = Math.floor(Math.random() * imagesWithIconToRandom.length);
+        originalIcon.src = imagesWithIconToRandom[randomIndex];
+        setTimeout(() => {
+            originalIcon.style.opacity = '0.5';
+        }, 500)
     });
 }
 
 function duplicateSalesIcon (icon, container, index) {
     const clonedIcon = icon.cloneNode(true);
 
-    clonedIcon.style.animation = `fall ${index % 2 === 0 ? 3 : 4}s`;
-    clonedIcon.style.animationDelay = index * 0.3 + 's';
+    clonedIcon.style.animation = `fall ${index % 2 === 0 ? 7 : 9}s`;
+    clonedIcon.style.animationDelay = index * 1.3 + 's';
     clonedIcon.style.animationFillMode = 'forwards';
 
     container.appendChild(clonedIcon);
@@ -141,11 +172,11 @@ function duplicateSalesIcon (icon, container, index) {
 const counts = document.querySelectorAll('.count-value');
 const percents = document.querySelectorAll('.percent');
 
-counts.forEach((count) => {
+counts.forEach((count, index) => {
     let value = Number(count.innerHTML);
     setInterval(() => {
         count.innerHTML = ++value;
-    }, 100)
+    }, index === 0 ? 600 : index === 1 ? 1000 : 300)
 })
 
 const intervals = [];
@@ -159,7 +190,8 @@ percents.forEach((percent) => {
         if (value >= 100) {
             clearInterval(intervalId);
         }
-    }, 500);
+    }, 2000);
 
     intervals.push(intervalId);
 });
+
