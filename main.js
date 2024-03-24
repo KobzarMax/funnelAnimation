@@ -137,3 +137,29 @@ function duplicateSalesIcon (icon, container, index) {
     container.appendChild(clonedIcon);
     rerunSalesAnimation(clonedIcon, container, index);
 }
+
+const counts = document.querySelectorAll('.count-value');
+const percents = document.querySelectorAll('.percent');
+
+counts.forEach((count) => {
+    let value = Number(count.innerHTML);
+    setInterval(() => {
+        count.innerHTML = ++value;
+    }, 100)
+})
+
+const intervals = [];
+
+percents.forEach((percent) => {
+    let value = Number(percent.innerHTML);
+    let intervalId = setInterval(() => {
+        if (value < 100) {
+            percent.innerHTML = ++value;
+        }
+        if (value >= 100) {
+            clearInterval(intervalId);
+        }
+    }, 500);
+
+    intervals.push(intervalId);
+});

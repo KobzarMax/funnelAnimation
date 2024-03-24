@@ -358,7 +358,7 @@
   }
   .funnel-item-wrapper {
     flex-direction: column;
-    gap: 50px;
+    gap: 85px;
   }
   .funnel-wrapper {
     gap: 50px;
@@ -374,6 +374,7 @@
     margin-right: 0;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
+    gap: 16px;
   }
   .funnel-counter-item {
     flex-direction: column;
@@ -381,7 +382,8 @@
     justify-content: center;
     gap: 6px;
     min-width: fit-content;
-    padding: 13px;
+    padding: 6px;
+    height: fit-content;
   }
   .funnel-item-wrapper .funnel-item {
     position: relative;
@@ -399,13 +401,13 @@
     overflow: visible;
   }
   .sales-item:nth-child(1) img, .sales-item:nth-child(2) img {
-    --fallLength: 170vh;
+    --fallLength: 105vh;
   }
   .sales-item:nth-child(3) img, .sales-item:nth-child(4) img {
-    --fallLength: 140vh;
+    --fallLength: 90vh;
   }
   .sales-item:nth-child(5) img, .sales-item:nth-child(6) img {
-    --fallLength: 120vh;
+    --fallLength: 80vh;
   }
   .second-icons, .third-icons {
     transform: translateY(-400px);
@@ -416,15 +418,17 @@
   .second-icons div img, .third-icons div img {
     --startPosition: 0px;
     --endPosition: 270%;
-    width: 100px;
+    width: 60px;
     max-width: 100%;
-    height: 125px;
   }
   .second-icons div img:nth-child(2), .third-icons div img:nth-child(2) {
     --startPosition: -30px;
     --endPosition: 250%;
     position: relative;
     z-index: 0;
+  }
+  .second-icons div img:not(:first-child) {
+    margin-left: -20px;
   }
 }
 
