@@ -72,15 +72,15 @@
   font-weight: 700;
   font-size: 18px;
   color: #000;
-  -webkit-box-shadow: -10px 10px 0 0 rgba(83,170,232,1);
-  -moz-box-shadow: -10px 10px 0 0 rgba(83,170,232,1);
-  box-shadow: -10px 10px 0 0 rgba(83,170,232,1);
+  -webkit-box-shadow: -10px 10px 0 0 rgba(83, 170, 232, 1);
+  -moz-box-shadow: -10px 10px 0 0 rgba(83, 170, 232, 1);
+  box-shadow: -10px 10px 0 0 rgba(83, 170, 232, 1);
 }
 .sales-item:after {
   left: 50%;
   width: 1px;
   height: 50px;
-  content: '';
+  content: "";
   border-left: 1px dotted #53aae8;
   display: block;
   top: 100%;
@@ -104,7 +104,7 @@
   bottom: 0;
   width: 84%;
   left: 8%;
-  content: '';
+  content: "";
   height: 1px;
   border-bottom: 1px dotted #53aae8;
   display: block;
@@ -198,9 +198,9 @@
   font-weight: 700;
   font-size: 18px;
   color: #000;
-  -webkit-box-shadow: -10px 10px 0 0 rgba(83,170,232,1);
-  -moz-box-shadow: -10px 10px 0 0 rgba(83,170,232,1);
-  box-shadow: -10px 10px 0 0 rgba(83,170,232,1);
+  -webkit-box-shadow: -10px 10px 0 0 rgba(83, 170, 232, 1);
+  -moz-box-shadow: -10px 10px 0 0 rgba(83, 170, 232, 1);
+  box-shadow: -10px 10px 0 0 rgba(83, 170, 232, 1);
 }
 .percent-wrapper {
   font-weight: 700;
@@ -414,28 +414,35 @@
   .funnel-item-wrapper {
     overflow: visible;
   }
-  .sales-item:nth-child(1) img, .sales-item:nth-child(2) img {
+  .sales-item:nth-child(1) img,
+  .sales-item:nth-child(2) img {
     --fallLength: 105vh;
   }
-  .sales-item:nth-child(3) img, .sales-item:nth-child(4) img {
+  .sales-item:nth-child(3) img,
+  .sales-item:nth-child(4) img {
     --fallLength: 90vh;
   }
-  .sales-item:nth-child(5) img, .sales-item:nth-child(6) img {
+  .sales-item:nth-child(5) img,
+  .sales-item:nth-child(6) img {
     --fallLength: 80vh;
   }
-  .second-icons, .third-icons {
+  .second-icons,
+  .third-icons {
     transform: translateY(-400px);
   }
-  .second-icons div img, .third-icons div img {
+  .second-icons div img,
+  .third-icons div img {
     opacity: 0;
   }
-  .second-icons div img, .third-icons div img {
+  .second-icons div img,
+  .third-icons div img {
     --startPosition: 0px;
     --endPosition: 270%;
     width: 60px;
     max-width: 100%;
   }
-  .second-icons div img:nth-child(2), .third-icons div img:nth-child(2) {
+  .second-icons div img:nth-child(2),
+  .third-icons div img:nth-child(2) {
     --startPosition: -30px;
     --endPosition: 250%;
     position: relative;
