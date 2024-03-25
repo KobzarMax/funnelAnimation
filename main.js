@@ -140,8 +140,8 @@ salesItemsContainers.forEach((item, index) => {
 });
 
 function runSalesAnimation(image, imageWrapper, index) {
-  image.style.animation = `fall ${index % 2 === 0 ? 7 : 9}s`;
-  image.style.animationDelay = index * 3.3 + "s";
+  image.style.animation = `fall 9s`;
+  image.style.animationDelay = index * 9 + "s";
   image.style.animationFillMode = "forwards";
 
   rerunSalesAnimation(image, imageWrapper, index);
@@ -170,8 +170,8 @@ function rerunSalesAnimation(originalIcon, container, index) {
 function duplicateSalesIcon(icon, container, index) {
   const clonedIcon = icon.cloneNode(true);
 
-  clonedIcon.style.animation = `fall ${index % 2 === 0 ? 7 : 9}s`;
-  clonedIcon.style.animationDelay = index * 3.3 + "s";
+  clonedIcon.style.animation = `fall 9s`;
+  clonedIcon.style.animationDelay = index * 9 + "s";
   clonedIcon.style.animationFillMode = "forwards";
 
   container.appendChild(clonedIcon);
