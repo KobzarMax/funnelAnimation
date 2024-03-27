@@ -61,7 +61,6 @@
 .sales-item {
   height: 80px;
   position: relative;
-  z-index: 3;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -90,7 +89,6 @@
   margin-bottom: 125px;
   padding-bottom: 50px;
   position: relative;
-  z-index: 10;
   opacity: 0;
   transform: translateY(100px);
   transition: 0.5s all ease-in;
@@ -148,66 +146,60 @@
   box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
   background: #fff;
 }
-.funnel-item-wrapper .funnel-item {
-  position: absolute;
-  left: 0;
-  bottom: 0;
+.funnel-item .funnel-image-wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: column;
   flex-grow: 1;
   width: 100%;
   height: 100%;
 }
-.funnel-item-wrapper:first-child .funnel-item {
+.funnel-item:first-child .funnel-image-wrapper {
   justify-content: center;
 }
-.funnel-item-wrapper:first-child {
+.funnel-item:first-child {
   align-items: stretch;
 }
-.funnel-item-wrapper:last-child .funnel-item {
+.funnel-item:last-child .funnel-image-wrapper {
   justify-content: center;
 }
-.funnel-image-wrapper {
+.animation-funnels {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.funnel-image-wrapper img:first-child {
+.animation-funnels:first-child .funnel-image-wrapper img:last-child {
+  margin-top: -42px;
   position: relative;
-  z-index: 1;
+  /*z-index: 5;*/
 }
-.funnel-item-wrapper:first-child .funnel-image-wrapper img:last-child {
-  margin-top: -40px;
+.animation-funnels:first-child .funnel-image-wrapper img:nth-child(2) {
+  margin-top: -37px;
+  margin-left: -3px;
   position: relative;
-  z-index: 3;
+  /*z-index: 3;*/
 }
-.funnel-item-wrapper:first-child .funnel-image-wrapper img:nth-child(2) {
-  margin-top: -40px;
+.animation-funnels:nth-child(2) .funnel-image-wrapper img:last-child {
+  margin-top: -27px;
   position: relative;
-  z-index: 4;
+  /*z-index: 5;*/
 }
-.funnel-item-wrapper:nth-child(2) .funnel-image-wrapper img:last-child {
-  margin-top: -24px;
+.animation-funnels:nth-child(2) .funnel-image-wrapper img:nth-child(2) {
+  margin-top: -22px;
   position: relative;
-  z-index: 3;
+  /*z-index: 3;*/
 }
-.funnel-item-wrapper:nth-child(2) .funnel-image-wrapper img:nth-child(2) {
-  margin-top: -24px;
-  position: relative;
-  z-index: 4;
-}
-.funnel-item-wrapper:nth-child(3) .funnel-image-wrapper img:last-child {
+.animation-funnels:nth-child(3) .funnel-image-wrapper img:last-child {
   margin-top: -16px;
   position: relative;
-  z-index: 3;
+  /*z-index: 5;*/
 }
-.funnel-item-wrapper:nth-child(3) .funnel-image-wrapper img:nth-child(2) {
+.animation-funnels:nth-child(3) .funnel-image-wrapper img:nth-child(2) {
   margin-top: -14px;
   position: relative;
-  z-index: 4;
+  /*z-index: 3;*/
 }
 .funnel-item-title {
   font-weight: 700;
@@ -348,22 +340,6 @@
     opacity: 0;
     transform: translateY(var(--endPosition));
   }
-}
-
-.sales-item {
-  transform: translateZ(2px);
-  position: relative;
-}
-
-.sales-item img {
-  position: absolute;
-  top: 0;
-  opacity: 0;
-  z-index: 3;
-  transition: 0.5s all ease-in-out;
-  width: 80px;
-  height: 80px;
-  --fallLength: 250px;
 }
 
 @keyframes fall {
@@ -512,4 +488,116 @@
   .funnel-counter-item .count-value {
     display: block;
   }
+}
+
+.funnel-image-inner .first-funnel-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.funnel-image-container {
+  position: absolute;
+  top: 0;
+  /*opacity: 0;*/
+  z-index: 4;
+  width: 80px;
+  height: 80px;
+  --fallLength: 250px;
+}
+.funnel-image-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+}
+.funnel-image-inner img {
+  position: absolute;
+}
+
+.funnel-image-container img:not(:first-child) {
+  opacity: 0;
+}
+
+@keyframes funnelStart {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(100%);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(100%) translateX(var(--screenMiddle));
+  }
+  40% {
+    transform: translateY(var(--fallLength)) translateX(var(--screenMiddle));
+  }
+  60% {
+    transform: translateY(var(--fallLength)) translateX(var(--screenMiddle));
+  }
+  80% {
+    transform: translateY(var(--fallLength)) translateX(var(--screenMiddle));
+  }
+  100% {
+    /*opacity: 0;*/
+    transform: translateY(var(--fallLength)) translateX(var(--screenMiddle));
+  }
+}
+
+@keyframes firstFunnelEnd {
+  40% {
+    opacity: 0;
+  }
+}
+
+@keyframes firstFunnelStart {
+  40% {
+    opacity: 1;
+  }
+}
+
+@keyframes secondFunnelEnd {
+  60% {
+    opacity: 0;
+  }
+}
+
+@keyframes secondFunnelStart {
+  60% {
+    opacity: 1;
+  }
+}
+
+@keyframes thirdFunnelEnd {
+  80% {
+    opacity: 0;
+  }
+}
+
+@keyframes thirdFunnelStart {
+  80% {
+    opacity: 1;
+  }
+}
+
+@keyframes calendarFunnelEnd {
+  80% {
+    opacity: 0;
+  }
+}
+
+@keyframes calendarFunnelStart {
+  80% {
+    opacity: 1;
+  }
+}
+
+.animation {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
 }

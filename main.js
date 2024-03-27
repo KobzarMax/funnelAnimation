@@ -95,75 +95,104 @@ function duplicateIcons(block, container) {
   }
 }
 
-const funnelItemWrappers = document.querySelectorAll(".funnel-item-wrapper");
-funnelItemWrappers.forEach((wrapper) => {
-  const iconsContainer = wrapper.querySelector(".icons-container");
-  const icons = iconsContainer && iconsContainer.querySelector(".icons");
-  if (iconsContainer && icons) {
-    runAnimationOnce(icons, iconsContainer);
-  }
-});
+// const funnelItemWrappers = document.querySelectorAll(".funnel-item-wrapper");
+// funnelItemWrappers.forEach((wrapper) => {
+//   const iconsContainer = wrapper.querySelector(".icons-container");
+//   const icons = iconsContainer && iconsContainer.querySelector(".icons");
+//   if (iconsContainer && icons) {
+//     runAnimationOnce(icons, iconsContainer);
+//   }
+// });
 
-const salesItemsContainers = document.querySelectorAll(".sales-item");
+// const salesItemsContainers = document.querySelectorAll(".sales-item");
+//
+// salesItemsContainers.forEach((item, index) => {
+//   const salesItem = item.querySelector("img");
+//   runSalesAnimation(salesItem, item, index);
+// });
+//
+// function runSalesAnimation(image, imageWrapper, index) {
+//   image.style.animation = `fall 9s`;
+//   image.style.animationDelay = index * 9 + "s";
+//   image.style.animationFillMode = "forwards";
+//
+//   rerunSalesAnimation(image, imageWrapper, index);
+// }
+
+const imageContainers = document.querySelectorAll('.funnel-image-container');
+const firstFunnel = document.querySelector('#firstFunnel');
+const secondFunnel = document.querySelector('#secondFunnel');
+const thirdFunnel = document.querySelector('#thirdFunnel');
+const calendar = document.querySelector('#calendar');
 const screenWidth = window.screen.width;
+const main = document.querySelector('.ai-animation');
+const topToFirstFunnel = main.scrollHeight - firstFunnel.offsetTop - firstFunnel.scrollHeight / 2;
+const topToSecondFunnel = main.scrollHeight - (secondFunnel.scrollTop - secondFunnel.scrollHeight / 2);
+const topToThirdFunnel = main.scrollHeight - (thirdFunnel.scrollTop - thirdFunnel.scrollHeight / 2);
+const topToCalendar = main.scrollHeight - (calendar.scrollTop - calendar.scrollHeight / 2);
+console.log(firstFunnel.getBoundingClientRect().top)
 
-salesItemsContainers.forEach((item, index) => {
-  const salesItem = item.querySelector("img");
+// document.addEventListener('scroll', () => {
+//   console.log(document.documentElement.scrollTop)
+// });
+
+imageContainers.forEach((container, index) => {
   if (screenWidth > 1200) {
     if (index === 0 || index === 1 || index === 2) {
-      salesItem.style.setProperty(
-        "--screenMiddle",
-        `calc(${30 - index * 10}vw)`
+      container.style.setProperty(
+          "--screenMiddle",
+          `calc(${30 - index * 10}vw)`
       );
-      salesItem.style.animationDelay = index * 0.5 + "s";
     } else {
-      salesItem.style.setProperty(
-        "--screenMiddle",
-        `calc(${20 - index * 10}vw)`
+      container.style.setProperty(
+          "--screenMiddle",
+          `calc(${20 - index * 10}vw)`
       );
-      salesItem.style.animationDelay = index * 0.5 + "s";
     }
   } else {
     if (index === 0 || index === 2 || index === 4) {
-      salesItem.style.setProperty("--screenMiddle", `calc(${index * 10}vw)`);
-      salesItem.style.animationDelay = index * 0.5 + "s";
+      container.style.setProperty("--screenMiddle", `calc(${index * 10}vw)`);
     } else {
-      salesItem.style.setProperty(
-        "--screenMiddle",
-        `calc(${10 - index * 10}vw)`
+      container.style.setProperty(
+          "--screenMiddle",
+          `calc(${10 - index * 10}vw)`
       );
-      salesItem.style.animationDelay = index * 0.5 + "s";
     }
   }
 
-  runSalesAnimation(salesItem, item, index);
-});
+  runSalesAnimation(container, index)
+})
 
-function runSalesAnimation(image, imageWrapper, index) {
-  image.style.animation = `fall 9s`;
-  image.style.animationDelay = index * 9 + "s";
-  image.style.animationFillMode = "forwards";
+function runSalesAnimation(container, index) {
+  const original = container.querySelector('.funnel-image-inner');
 
-  rerunSalesAnimation(image, imageWrapper, index);
+  container.style.animation = `funnelStart 30s`;
+  container.style.animationDelay = index * 15 + "s";
+  container.style.animationFillMode = "forwards";
+
+  setTimeout(() => {
+    const first = original.querySelector('.first-funnel-icon');
+    const second = original.querySelector('.second-funnel-icon');
+    first.style.opacity = '0';
+    second.style.opacity = '1';
+
+  }, 10000)
+
+  container.addEventListener('animationend', () => {
+    rerunSalesAnimation(original, container, index);
+  })
+
 }
 
-function rerunSalesAnimation(originalIcon, container, index) {
+
+function rerunSalesAnimation(original, container, index) {
   const iconsLength = container.querySelectorAll("img");
   if (iconsLength.length > 3) {
     iconsLength[1].remove();
   }
 
-  originalIcon.addEventListener("animationend", function () {
-    duplicateSalesIcon(originalIcon, container, index);
-
-    originalIcon.style.opacity = "0";
-    const randomIndex = Math.floor(
-      Math.random() * imagesWithIconToRandom.length
-    );
-    originalIcon.src = imagesWithIconToRandom[randomIndex];
-    setTimeout(() => {
-      originalIcon.style.opacity = "0.5";
-    }, 500);
+  original.addEventListener("animationend", function () {
+    duplicateSalesIcon(original, container, index);
   });
 }
 
