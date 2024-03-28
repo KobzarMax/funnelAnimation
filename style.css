@@ -86,18 +86,21 @@
   position: absolute;
 }
 .sales-wrapper {
-  margin-bottom: 125px;
-  padding-bottom: 50px;
-  position: relative;
   opacity: 0;
   transform: translateY(100px);
   transition: 0.5s all ease-in;
+  position: relative;
+}
+.sales-list {
+  position: relative;
+  margin-bottom: 125px;
+  padding-bottom: 50px;
 }
 .sales-wrapper.viewed {
   opacity: 1;
   transform: translateY(0px);
 }
-.sales-wrapper:after {
+.sales-list:after {
   position: absolute;
   bottom: 0;
   width: 84%;
@@ -164,42 +167,42 @@
 .funnel-item:last-child .funnel-image-wrapper {
   justify-content: center;
 }
-.animation-funnels {
+.funnel-list {
+  position: absolute;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
 }
-.animation-funnels:first-child .funnel-image-wrapper img:last-child {
+.sales-wrapper .funnel-item:not(:first-child) {
+  height: 370px;
+}
+.sales-wrapper .funnel-item:first-child .funnel-image-wrapper img:last-child {
   margin-top: -42px;
   position: relative;
-  /*z-index: 5;*/
+  z-index: 5;
+  transform: translateZ(10px);
 }
-.animation-funnels:first-child .funnel-image-wrapper img:nth-child(2) {
+.sales-wrapper .funnel-item:first-child .funnel-image-wrapper img:nth-child(2) {
   margin-top: -37px;
   margin-left: -3px;
-  position: relative;
-  /*z-index: 3;*/
 }
-.animation-funnels:nth-child(2) .funnel-image-wrapper img:last-child {
+.sales-wrapper .funnel-item:nth-child(2) .funnel-image-wrapper img:last-child {
   margin-top: -27px;
+  z-index: 5;
   position: relative;
-  /*z-index: 5;*/
 }
-.animation-funnels:nth-child(2) .funnel-image-wrapper img:nth-child(2) {
+.sales-wrapper .funnel-item:nth-child(2) .funnel-image-wrapper img:nth-child(2) {
   margin-top: -22px;
-  position: relative;
-  /*z-index: 3;*/
 }
-.animation-funnels:nth-child(3) .funnel-image-wrapper img:last-child {
+.sales-wrapper .funnel-item:nth-child(3) .funnel-image-wrapper img:last-child {
   margin-top: -16px;
+  z-index: 5;
   position: relative;
-  /*z-index: 5;*/
 }
-.animation-funnels:nth-child(3) .funnel-image-wrapper img:nth-child(2) {
+.sales-wrapper .funnel-item:nth-child(3) .funnel-image-wrapper img:nth-child(2) {
   margin-top: -14px;
-  position: relative;
-  /*z-index: 3;*/
 }
 .funnel-item-title {
   font-weight: 700;
@@ -498,7 +501,7 @@
 .funnel-image-container {
   position: absolute;
   top: 0;
-  /*opacity: 0;*/
+  opacity: 0;
   z-index: 4;
   width: 80px;
   height: 80px;
@@ -533,17 +536,56 @@
     transform: translateY(100%) translateX(var(--screenMiddle));
   }
   40% {
+    opacity: 0;
     transform: translateY(var(--fallLength)) translateX(var(--screenMiddle));
   }
   60% {
-    transform: translateY(var(--fallLength)) translateX(var(--screenMiddle));
+    opacity: 1;
+    transform: translateY(var(--fall2Length)) translateX(var(--screenMiddle));
   }
   80% {
-    transform: translateY(var(--fallLength)) translateX(var(--screenMiddle));
+    transform: translateY(var(--fall3Length)) translateX(var(--screenMiddle));
   }
   100% {
-    /*opacity: 0;*/
-    transform: translateY(var(--fallLength)) translateX(var(--screenMiddle));
+    opacity: 0;
+    transform: translateY(var(--fall4Length)) translateX(var(--screenMiddle));
+  }
+}
+
+@keyframes funnelSecond {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(100%);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(var(--fall2Length)) translateX(var(--screenMiddle));
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(var(--fall2Length)) translateX(var(--screenMiddle));
+  }
+}
+
+@keyframes funnelSecond {
+  0% {
+    opacity: 0;
+    transform: translateY(var(--fall2Length)) translateX(var(--screenMiddle));
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(100%) translateX(var(--screenMiddle));
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(var(--fall3Length)) translateX(var(--screenMiddle));
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(var(--fall3Length)) translateX(var(--screenMiddle));
   }
 }
 
@@ -593,11 +635,4 @@
   80% {
     opacity: 1;
   }
-}
-
-.animation {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
 }

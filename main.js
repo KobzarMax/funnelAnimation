@@ -87,12 +87,12 @@ function duplicateIcons(block, container) {
 
   container.appendChild(clonedIcons);
   rerunAnimation(clonedIcons, container);
-  const randomImage = clonedIcons.querySelector(".randomImage");
-
-  if (randomImage) {
-    const randomIndex = Math.floor(Math.random() * imagesToRandom.length);
-    randomImage.src = imagesToRandom[randomIndex];
-  }
+  // const randomImage = clonedIcons.querySelector(".randomImage");
+  //
+  // if (randomImage) {
+  //   const randomIndex = Math.floor(Math.random() * imagesToRandom.length);
+  //   randomImage.src = imagesToRandom[randomIndex];
+  // }
 }
 
 // const funnelItemWrappers = document.querySelectorAll(".funnel-item-wrapper");
@@ -126,11 +126,14 @@ const thirdFunnel = document.querySelector('#thirdFunnel');
 const calendar = document.querySelector('#calendar');
 const screenWidth = window.screen.width;
 const main = document.querySelector('.ai-animation');
+const salesWrapperSection = document.querySelector('.sales-wrapper');
+const extraHeight = main.scrollHeight - salesWrapperSection.scrollHeight;
+
 const topToFirstFunnel = main.scrollHeight - firstFunnel.offsetTop - firstFunnel.scrollHeight / 2;
 const topToSecondFunnel = main.scrollHeight - (secondFunnel.scrollTop - secondFunnel.scrollHeight / 2);
 const topToThirdFunnel = main.scrollHeight - (thirdFunnel.scrollTop - thirdFunnel.scrollHeight / 2);
 const topToCalendar = main.scrollHeight - (calendar.scrollTop - calendar.scrollHeight / 2);
-console.log(firstFunnel.getBoundingClientRect().top)
+console.log(firstFunnel.getBoundingClientRect().top - extraHeight)
 
 // document.addEventListener('scroll', () => {
 //   console.log(document.documentElement.scrollTop)
@@ -141,12 +144,12 @@ imageContainers.forEach((container, index) => {
     if (index === 0 || index === 1 || index === 2) {
       container.style.setProperty(
           "--screenMiddle",
-          `calc(${30 - index * 10}vw)`
+          `calc(${35 - index * 15}vw)`
       );
     } else {
       container.style.setProperty(
           "--screenMiddle",
-          `calc(${20 - index * 10}vw)`
+          `calc(${30 - index * 15}vw)`
       );
     }
   } else {
@@ -170,13 +173,6 @@ function runSalesAnimation(container, index) {
   container.style.animationDelay = index * 15 + "s";
   container.style.animationFillMode = "forwards";
 
-  setTimeout(() => {
-    const first = original.querySelector('.first-funnel-icon');
-    const second = original.querySelector('.second-funnel-icon');
-    first.style.opacity = '0';
-    second.style.opacity = '1';
-
-  }, 10000)
 
   container.addEventListener('animationend', () => {
     rerunSalesAnimation(original, container, index);
