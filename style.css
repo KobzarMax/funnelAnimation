@@ -501,19 +501,19 @@
 .funnel-image-container {
   position: absolute;
   top: 0;
-  opacity: 0;
-  z-index: 4;
   width: 80px;
   height: 80px;
-  --fallLength: 250px;
 }
 .funnel-image-inner {
   position: relative;
+  opacity: 0;
+  z-index: 4;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 80px;
   height: 80px;
+  animation-timing-function: ease-in-out;
 }
 .funnel-image-inner img {
   position: absolute;
@@ -531,108 +531,105 @@
     opacity: 1;
     transform: translateY(100%);
   }
-  20% {
+  40% {
     opacity: 1;
     transform: translateY(100%) translateX(var(--screenMiddle));
   }
-  40% {
-    opacity: 0;
-    transform: translateY(var(--fallLength)) translateX(var(--screenMiddle));
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(var(--fall2Length)) translateX(var(--screenMiddle));
-  }
-  80% {
-    transform: translateY(var(--fall3Length)) translateX(var(--screenMiddle));
-  }
   100% {
     opacity: 0;
-    transform: translateY(var(--fall4Length)) translateX(var(--screenMiddle));
+    transform: translateY(calc(var(--fallLength) + 30px)) translateX(var(--screenMiddle));
   }
 }
 
 @keyframes funnelSecond {
   0% {
     opacity: 0;
+    transform: translateY(calc(var(--fallLength) + 40px)) translateX(var(--screenMiddle));
   }
   10% {
     opacity: 1;
-    transform: translateY(100%);
+    transform: translateY(calc(var(--fallLength) + 40px)) translateX(var(--screenMiddle));
   }
   80% {
     opacity: 1;
-    transform: translateY(var(--fall2Length)) translateX(var(--screenMiddle));
+    transform: translateY(calc(var(--fall2Length) + 40px)) translateX(var(--screenMiddle));
   }
   100% {
     opacity: 0;
-    transform: translateY(var(--fall2Length)) translateX(var(--screenMiddle));
+    transform: translateY(calc(var(--fall2Length) + 40px)) translateX(var(--screenMiddle));
   }
 }
 
-@keyframes funnelSecond {
+@keyframes funnelThird {
   0% {
     opacity: 0;
-    transform: translateY(var(--fall2Length)) translateX(var(--screenMiddle));
+    transform: translateY(calc(var(--fall2Length) + 30px)) translateX(var(--screenMiddle));
   }
   10% {
     opacity: 1;
-    transform: translateY(100%) translateX(var(--screenMiddle));
+    transform: translateY(calc(var(--fall2Length) + 30px)) translateX(var(--screenMiddle));
   }
   80% {
     opacity: 1;
-    transform: translateY(var(--fall3Length)) translateX(var(--screenMiddle));
+    transform: translateY(calc(var(--fall3Length) + 30px)) translateX(var(--screenMiddle));
   }
   100% {
     opacity: 0;
-    transform: translateY(var(--fall3Length)) translateX(var(--screenMiddle));
+    transform: translateY(calc(var(--fall3Length) + 30px)) translateX(var(--screenMiddle));
   }
 }
 
-@keyframes firstFunnelEnd {
-  40% {
+@keyframes funnelCalendar {
+  0% {
     opacity: 0;
+    transform: translateY(calc(var(--fall3Length) + 30px)) translateX(var(--screenMiddle));
   }
-}
-
-@keyframes firstFunnelStart {
-  40% {
+  10% {
     opacity: 1;
+    transform: translateY(calc(var(--fall3Length) + 30px)) translateX(var(--screenMiddle));
   }
-}
-
-@keyframes secondFunnelEnd {
-  60% {
-    opacity: 0;
-  }
-}
-
-@keyframes secondFunnelStart {
-  60% {
-    opacity: 1;
-  }
-}
-
-@keyframes thirdFunnelEnd {
-  80% {
-    opacity: 0;
-  }
-}
-
-@keyframes thirdFunnelStart {
   80% {
     opacity: 1;
+    transform: translateY(calc(var(--fall4Length) + 30px)) translateX(var(--screenMiddle));
   }
-}
-
-@keyframes calendarFunnelEnd {
-  80% {
+  100% {
     opacity: 0;
+    transform: translateY(calc(var(--fall4Length) + 30px)) translateX(var(--screenMiddle));
   }
 }
 
-@keyframes calendarFunnelStart {
-  80% {
-    opacity: 1;
-  }
+#calendar {
+  max-width: 205px;
+  width: 100%;
+  background-image: url("./asset/calendar.svg");
+  height: 160px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  z-index: 8;
+}
+#calendar:after {
+  position: absolute;
+  bottom: -16px;
+  right: -30px;
+  content: '';
+  width: 80px;
+  height: 109px;
+  background-image: url("./asset/calendar_girl.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.calendar-inner {
+  padding: 45px 12px 12px 12px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2.33px;
+}
+.calendar-inner input {
+  appearance: none;
+  width: 100%;
+  border-radius: 1.53px;
+  background-color: #ffffff;
+  border: none;
 }
